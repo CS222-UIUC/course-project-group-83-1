@@ -2,6 +2,13 @@ import unittest
 import scrape
 import pandas as pd
 import os 
+'''
+Basic testing of the function scrape_test. A search is run as seen 
+in setUp (setUp and tearDown run evertime a testcase is run). 
+tearDown deltes the generated json file after the test completes.
+This code checks if the dates are within the specified range and 
+checks that we have correctly filterd the data for repeat users. 
+'''
 class TestScrape(unittest.TestCase):
     def setUp(self):
         scrape.scrape_test(["HI", "we"], '2021-10-05', '2021-11-05')

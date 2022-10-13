@@ -1,6 +1,7 @@
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from nltk.corpus import wordnet
+
 '''
 generate_keys returns a python list of words (strings) 
 that are related to the string passed into the fuction.
