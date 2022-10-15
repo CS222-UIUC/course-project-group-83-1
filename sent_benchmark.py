@@ -4,18 +4,49 @@
 import spacy, time
 from spacytextblob.spacytextblob import SpacyTextBlob
 
-nlp = spacy.load('en_core_web_sm')
-nlp.add_pipe('spacytextblob')                   
+import pandas as pd
+import json
+from pandas import json_normalize
 
 
 
-def analyze_line(nlp_, text):
+
+def analyze_line(nlp_, text,date):
     doc = nlp_(text)
     pol = doc._.blob.polarity                            # Polarity: -0.125
     sub = doc._.blob.subjectivity                        # Subjectivity: 0.9
-    ass = doc._.blob.sentiment_assessments.assessments   # Assessments: [(['really', 'horrible'], -1.0, 1.0, None), (['worst', '!'], -1.0, 1.0, None), (['really', 'good'], 0.7, 0.6000000000000001, None), (['happy'], 0.8, 1.0, None)]
-    grams = doc._.blob.ngrams()   
-    result = f"text:{text},pol:{pol},sub:{sub}"
+    # ass = doc._.blob.sentiment_assessments.assessments   # Assessments: [(['really', 'horrible'], -1.0, 1.0, None), (['worst', '!'], -1.0, 1.0, None), (['really', 'good'], 0.7, 0.6000000000000001, None), (['happy'], 0.8, 1.0, None)]
+    # grams = doc._.blob.ngrams()   
+    result = f'{date};"{text}";{pol};{sub}'
+    return result, pol
+
+def main_(file_input, file_output):
+    nlp = spacy.load('en_core_web_sm')
+    nlp.add_pipe('spacytextblob') 
+    
+    text = ""
+    with open(file_input, "r") as f:
+        text = f.read()
+    if (text == ""):
+        raise ValueError("Input file not valid")
+    df = pd.Dataframe(json.loads(text))
+
+    neg = 0
+    pos = 0
+    neutral = 0
+    with open(file_output,"a") as f:
+        for index, row in df.iterrows():
+            processed, pol = analyze_line(nlp, row["Text"], row["Date"])
+            file_output.write(processed + "\n")
+            if (pol > .01):
+                pos += 1
+            elif (pol < -.01):
+                neg += 1
+            else: 
+                neutral += 1
+    print(f"negative count: {neg}\npositive count: {pos}\nneutral count: {neutral}")
+
+    
     
 
 
