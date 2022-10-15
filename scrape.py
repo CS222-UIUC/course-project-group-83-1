@@ -1,6 +1,7 @@
 import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from nltk.corpus import wordnet
+from cleantext import clean #need to install clean-text library beforehand
 
 '''
 generate_keys returns a python list of words (strings) 
@@ -15,7 +16,7 @@ def generate_keys(word):
     for i in range(len(keywords)):
         keywords[i] = keywords[i].replace('_',' ')
     return keywords
-
+    
 '''
 Same function as above, but does not remove underscores.
 Will probably need to check if the initial word passed in
@@ -25,6 +26,18 @@ function to use.
 def generate_keys_(word):
     keywords = wordnet.synsets(word)[0].lemma_names()
     return keywords
+
+'''
+clean_up removes emojis, urls, and other data from the tweet
+that may interfere with the semantic analysis process.
+more factors to consider will be added as deeemed necessary
+by the team.
+'''
+def clean_up(text):
+    text = clean(text, no_urls=True, no_emoji=True, replace_with_url="")
+    text = text.replace('@', '')
+    #will add more as deemed necessary for semantic analysis
+    return text
 
 '''
 keyword_list: list of words generated to search
@@ -43,7 +56,7 @@ def scrape(keyword_list, start_date, end_date):
         query = keyword + ' since:' + start_date + ' until:' + end_date
         data = sntwitter.TwitterSearchScraper(query).get_items()
         for tweet in data:
-            tweets.append([tweet.content, tweet.date, tweet.user.username])
+            tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
     df_1 = pd.DataFrame(tweets, columns=['Tweet', 'Date', 'User' ])
     df_1.drop_duplicates()
     df_1.drop_duplicates(subset=['User'])
@@ -67,7 +80,7 @@ def scrape_test(keyword_list, start_date, end_date):
             if i >= 200:
                 break
             else:
-                tweets.append([tweet.content, tweet.date, tweet.user.username])
+                tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
     df_1 = pd.DataFrame(tweets, columns=['Tweet', 'Date', 'User' ])
     df_1 = df_1.drop_duplicates()
     df_1 = df_1.drop_duplicates(subset=['User'])
