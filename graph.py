@@ -6,7 +6,7 @@ Notes for future: May need to change
 graph output fomat (currently
 writes to a PNG image)
 depending on how the user interface is made. 
-Also may need to optomize later.
+Also may need to optimize later.
 '''
 
 '''
@@ -33,7 +33,7 @@ def create_bar(json_file):
 '''
 Creates a pie chart of the sentiments 
 (Positive, Negative, Neutral) by turing a JSON 
-file into a data frame. Includes percentages
+file into a data frame. Includes percentages.
 This function will write the graph to an image, 
 named pie_chart.png
 '''
@@ -57,6 +57,12 @@ of negative, positive, and neutral (represented by
 different colors) tweets vs the date by turing a JSON 
 file into a data frame. This function will
 write the graph to an image, named scatter_plot.png
+
+Note: Currently, this function groups the time that 
+the data was collected in by day, so it is good for
+large datasets that span multiple days, but not 
+good for small datasets that only cover one or a 
+few days. 
 '''
 
 def create_scatter(json_file):
@@ -97,6 +103,6 @@ def visualize_data(json_file):
     pass
 
 
-create_bar("processed_df.json")
-create_pie("processed_df.json")
-create_scatter('processed_df.json')
+#create_bar("processed_df.json")
+#create_pie("processed_df.json")
+#create_scatter('processed_df.json')
