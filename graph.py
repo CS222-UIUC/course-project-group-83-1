@@ -72,20 +72,16 @@ def create_scatter(json_file):
         df = pd.read_json(f)
     df['date_no_time'] = df['Date'].dt.normalize()
     unique_dates = df['date_no_time'].unique()
-    print(unique_dates.shape)
     count_per_category = dict()
     count_per_category["Positive"] = []
     count_per_category["Neutral"] = []
     count_per_category["Negative"] = []
     for i in range(unique_dates.shape[0]):
         df_by_date = df[df['date_no_time'] == unique_dates[i]]
-        if i < 7:
-            print(df_by_date)
         #may need to change bounds for categories later
         count_per_category["Positive"].append(df_by_date[df_by_date["Polarity"] > .10].shape[0])
         count_per_category["Neutral"].append(df_by_date[(df_by_date["Polarity"] >= -.10) & (df_by_date["Polarity"] <= 10)].shape[0])
         count_per_category["Negative"].append(df_by_date[df_by_date["Polarity"] < -.10].shape[0])
-    #print(count_per_category)
     plt.scatter(unique_dates, count_per_category["Positive"], s =10, c = 'blue')
     plt.scatter(unique_dates, count_per_category["Neutral"], s =10, c = 'black')
     plt.scatter(unique_dates, count_per_category["Negative"], s =10, c = 'red')
