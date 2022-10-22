@@ -20,6 +20,18 @@ def analyze_line(nlp_, text,date):
     result = f'{date};"{text}";{pol};{sub}'
     return result, pol
 
+def return_dataframe(json_file):
+    df = pd.read_json(json_file)
+    print(df)
+
+json_f = "tweets.json"
+return_dataframe(json_f)
+
+def process_data(df, tweet_col):
+    for tweet in df[tweet_col].iteritems():
+        #analyze_line(nlp, tweet)
+
+
 def main_(file_input, file_output):
     nlp = spacy.load('en_core_web_sm')
     nlp.add_pipe('spacytextblob') 
@@ -85,5 +97,5 @@ def benchmark(file, input, runs): # file -> output file ; input -> input file
         
 #create_test_file("text_100lines.txt", 100)
 
-benchmark("benchmark_100lines.txt","text_100lines.txt", 20)
+#benchmark("benchmark_100lines.txt","text_100lines.txt", 20)
 
