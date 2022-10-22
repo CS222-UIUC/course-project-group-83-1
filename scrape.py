@@ -91,7 +91,7 @@ def scrape_test(keyword_list, start_date, end_date):
         query = keyword + " since:" + start_date + " until:" + end_date
         data = sntwitter.TwitterSearchScraper(query).get_items()
         for i, tweet in enumerate(data):
-            if i >= 2:
+            if i >= 200:
                 break
             else:
                 tweets.append(
