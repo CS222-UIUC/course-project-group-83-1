@@ -8,18 +8,18 @@ import pandas as pd
 import json
 from pandas import json_normalize
 import numpy as np
-
 import atexit
 
+# Lists holding the tweets' polarity and subjectivity
 pol_list = []
 sub_list = []
 
+# Handle interrupts
 def exit_handler():
     print("Dumping lists")
     with open("backup_list.json", "w") as f:
         f.write(json.dumps([pol_list,sub_list]))
         
-
 atexit.register(exit_handler)
 
 
@@ -75,9 +75,9 @@ def main(json_input, tags, output):
     print("Processing successful")
     print(f"Time taken: {end-start} seconds")
     
-tags = ["Tweet", "Polarity", "Subjectivity"]
-json_in = "tweets.json"
-out_file = "processed_df.json"
-main(json_in, tags,out_file)
+#tags = ["Tweet", "Polarity", "Subjectivity"]
+#json_in = "tweets.json"
+#out_file = "processed_df.json"
+#main(json_in, tags,out_file)
 
         
