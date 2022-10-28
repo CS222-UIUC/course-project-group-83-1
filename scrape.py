@@ -2,9 +2,10 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from nltk.corpus import wordnet
 from cleantext import clean #need to install clean-text library beforehand
-
+import datetime
+#install unidecode
 '''
-generate_keys returns a python list of words (strings) 
+generate_keys returns a list of keywords (strings) 
 that are related to the string passed into the fuction.
 The returned list will always contain the string that
 was passed in. There may be problems if the user 
@@ -16,7 +17,7 @@ def generate_keys(word):
     for i in range(len(keywords)):
         keywords[i] = keywords[i].replace('_',' ')
     return keywords
-    
+
 '''
 Same function as above, but does not remove underscores.
 Will probably need to check if the initial word passed in
@@ -26,62 +27,95 @@ function to use.
 def generate_keys_(word):
     keywords = wordnet.synsets(word)[0].lemma_names()
     return keywords
-    
+
 '''
 clean_up removes emojis, urls, and other data from the tweet
 that may interfere with the semantic analysis process.
-more factors to consider will be added as deeemed necessary
+More factors to consider will be added as deeemed necessary
 by the team.
 '''
 def clean_up(text):
-    text = clean(text, no_urls=True, no_emoji=True, replace_with_url="")
+    text = clean(text, no_urls=True, replace_with_url="",no_emoji=True)
     text = text.replace('@', '')
+    text = text.replace('\n', '')
     #will add more as deemed necessary for semantic analysis
     return text
 
 '''
-keyword_list: list of words generated to search
+keyword: keyword used to search
 start_date: date to start seaching in year-month-day format xxxx-xx-xx
 end_date: date to stop seaching in year-month-day format xxxx-xx-xx
-takes in a list of words to scrape tweets between a specific
-time frame. Removes duplicate entries and duplicate users. 
+output_file: filename to write results to
+
+Scrapes tweets related to a given keyword between a specific
+time frame. Cleans tweets of content that may interfere with
+semantic analysis. Removes duplicate entries and duplicate users. 
 Writes results as a JSON file named tweets.json.
 This function can take between 15-60 minutes to complete since
 it collects ALL tweets between the time range.
+Note: orignally this fuction took in a list of keywords. However
+after further investigation, snscrape does not directly search
+with the keyword (some tweets collected do not contain the 
+exact keyword). This fuction was changed back to only searching
+with one keyword. Going foward, in the user interface, the related
+keys should be generated and the user should be promted to pick one
+that will be used in the query.
 '''
-def scrape(keyword_list, start_date, end_date):
+def scrape(keyword, start_date, end_date, output_file):
     tweets = []
-    for keyword in keyword_list:
-        query = keyword + ' since:' + start_date + ' until:' + end_date
-        data = sntwitter.TwitterSearchScraper(query).get_items()
-        for tweet in data:
+    query = keyword + ' since:' + start_date + ' until:' + end_date
+    data = sntwitter.TwitterSearchScraper(query).get_items()
+    for tweet in data:
             tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
     df_1 = pd.DataFrame(tweets, columns=['Tweet', 'Date', 'User' ])
     df_1.drop_duplicates()
     df_1.drop_duplicates(subset=['User'])
-    f = open("tweets.json", "w")
-    f.close()
-    f.write(df_1.to_json())
+    print(df_1)
+    with open(output_file, "w") as f:
+        f.write(df_1.to_json())
 
 '''
 This function is the same as above except that it
-stops collecting tweets once a certian amount of data
-is collected. This function will be used for testing 
+only collects a certain amount of tweets per day in the given date range.
+This function will be used for testing 
 purposes since it is not practical to run 15-60 minute
 tests often.
+Note: there could be better ways to scrape x amount of tweets per day, still figuring out alternatives
 '''
-def scrape_test(keyword_list, start_date, end_date):
+def scrape_test(keyword, start_date, end_date, output_file):
     tweets = []
-    for keyword in keyword_list:
-        query = keyword + ' since:' + start_date + ' until:' + end_date
+    # query = keyword + ' since:' + start_date + ' until:' + end_date
+    # data = sntwitter.TwitterSearchScraper(query).get_items()
+    # current_date = datetime.date.fromisoformat(end_date) - datetime.timedelta(1)
+    # for i, tweet in enumerate(data):
+    #     if (tweet.date.date() != current_date):
+    #         continue
+    #     if i < 4:
+    #         tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
+    #     else:
+    #         current_date = current_date - datetime.timedelta(1)
+    #         i = 0
+    end_interval = datetime.date.fromisoformat(end_date)
+    start_interval = end_interval - datetime.timedelta(1)
+    while (end_interval != datetime.date.fromisoformat(start_date)):
+        query = keyword + ' since:' + datetime.date.isoformat(start_interval) + ' until:' + datetime.date.isoformat(end_interval)
         data = sntwitter.TwitterSearchScraper(query).get_items()
         for i, tweet in enumerate(data):
             if i >= 200:
                 break
             else:
                 tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
+        end_interval = end_interval - datetime.timedelta(1)
+        start_interval = start_interval - datetime.timedelta(1)
     df_1 = pd.DataFrame(tweets, columns=['Tweet', 'Date', 'User' ])
     df_1 = df_1.drop_duplicates()
     df_1 = df_1.drop_duplicates(subset=['User'])
-    f = open("tweets.json", "w")
-    f.write(df_1.to_json())
+    print(df_1)
+    with open(output_file, "w") as f:
+        f.write(df_1.to_json())
+
+#scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
+scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
+
+
+#two approaches, one: for each day, query, two: for each i, somehow only append the tweets that belong to a day
