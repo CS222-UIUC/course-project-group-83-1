@@ -14,7 +14,13 @@ import atexit
 pol_list = []
 sub_list = []
 
-# Handle interrupts
+"""
+Handles interrupts. Dumps the polarity and subjectivity lists into a back up json file.
+    input:
+        void
+    output:
+        void  
+"""
 def exit_handler():
     print("Dumping lists")
     with open("backup_list.json", "w") as f:
@@ -22,7 +28,15 @@ def exit_handler():
         
 atexit.register(exit_handler)
 
-
+"""
+Determines the polarity and subjectivity of a single tweet
+    input:
+        [Language] nlp_ -> spacy Language object with loaded pipeline
+        [str] text      -> text to be analyzed
+    output:
+        [int] pol       -> polarity of text
+        [int] sub       -> subjectivity of text
+"""
 def analyze_line(nlp_, text):
     doc = nlp_(text)
     pol = doc._.blob.polarity                         
@@ -31,14 +45,27 @@ def analyze_line(nlp_, text):
     # grams = doc._.blob.ngrams()   
     return pol, sub
 
+"""
+Reads json file of a dataframe and extracts it
+    input:
+        [str] json_file    -> path to json file, stores the json of a dataframe
+    output:
+        [Dataframe] df     -> pd.DataFrame object
+"""
 def return_dataframe(json_file):
     df = pd.read_json(json_file)
     #print(df)
     return df
 
-#json_f = "tweets.json"
-#return_dataframe(json_f)
 
+"""
+Appends a polarity and subjectivity column to the given Tweets dataframe
+    input:
+        [Dataframe] df     -> dataframe of tweets + dates
+        [list] tags        -> list of strings, ordered: [tweet_col, polarity_col, subjectivity_col]
+    output:
+        [Dataframe] df     -> pd.DataFrame object with calculated polarities + subjectivity
+"""
 def process_data(df, tags): # tags ==> [tweet_col, polarity_col, subjectivity_col]
     tweet_col, pol_col, sub_col = tags
     nlp = spacy.load('en_core_web_sm')
@@ -57,8 +84,43 @@ def process_data(df, tags): # tags ==> [tweet_col, polarity_col, subjectivity_co
     
 
     return df
+    
+    
+def average_polarity(df, tags):
+    pol_col, day_col = tags
+    nlp = spacy.load('en_core_web_sm')
+    nlp.add_pipe('spacytextblob') 
+    
+    day_total = 0   # total polarity for the day
+    day_count = 0   # total recorded polarities for the day
 
-def main(json_input, tags, output):
+    day_average = []
+    day = []
+
+    curr_day = df[day_col][0].floor('d')
+    for index, row in df.iterrows():
+        if (curr_day != row[day_col].floor('d')):
+            print(type(curr_day))
+            day.append(curr_day)
+            day_average.append(day_total/ day_count)
+
+            day_total = 0
+            day_count = 0
+            curr_day = row[day_col].floor('d')
+        day_total += row[pol_col]
+        day_count += 1
+        
+    if (day_count != 0):
+        day.append(curr_day)
+        day_average.append(day_total/ day_count)
+
+    df = pd.DataFrame(list(zip(day, day_average)),
+               columns =['Date', 'Polarity_Average'])
+
+    return df
+
+
+def main(json_input, tags, output, avg_output=""):
     if (json_input == "" or output == ""):
         raise ValueError("Input/ output file not valid")
     print("Start processing")
@@ -74,10 +136,18 @@ def main(json_input, tags, output):
     
     print("Processing successful")
     print(f"Time taken: {end-start} seconds")
+    avg = average_polarity(processed_df,["Polarity","Date"])
     
-#tags = ["Tweet", "Polarity", "Subjectivity"]
-#json_in = "tweets.json"
-#out_file = "processed_df.json"
-#main(json_in, tags,out_file)
+    print(avg)
+    if (avg_output != ""):
+        with open(avg_output, "w") as f:
+            f.write(avg.to_json())
+
+    print("Average Successful")
+    
+tags = ["Tweet", "Polarity", "Subjectivity"]
+json_in = "tweets.json"
+out_file = "processed_df.json"
+main(json_in, tags,out_file,"average.json")
 
         
