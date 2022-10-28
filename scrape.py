@@ -80,7 +80,13 @@ only collects a certain amount of tweets per day in the given date range.
 This function will be used for testing 
 purposes since it is not practical to run 15-60 minute
 tests often.
-Note: there could be better ways to scrape x amount of tweets per day, still figuring out alternatives
+Note: I had two ideas for trying to scarpe x amount of tweets per day.
+One was to query each day in the date range
+and add 200 tweets from each day to the data.
+Another was to query the entire date range
+but only save x amount of tweets from each date.
+I don't know if one is more efficient than the other
+as I'm still trying to figure out the second approach
 '''
 def scrape_test(keyword, start_date, end_date, output_file):
     tweets = []
@@ -115,7 +121,4 @@ def scrape_test(keyword, start_date, end_date, output_file):
         f.write(df_1.to_json())
 
 #scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
-scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
-
-
-#two approaches, one: for each day, query, two: for each i, somehow only append the tweets that belong to a day
+#scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
