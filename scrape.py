@@ -2,6 +2,7 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from nltk.corpus import wordnet
 from cleantext import clean #need to install clean-text library beforehand
+
 import datetime
 #install unidecode
 '''
@@ -32,6 +33,7 @@ def generate_keys_(word):
 clean_up removes emojis, urls, and other data from the tweet
 that may interfere with the semantic analysis process.
 More factors to consider will be added as deeemed necessary
+
 by the team.
 '''
 def clean_up(text):
@@ -45,6 +47,7 @@ def clean_up(text):
 keyword: keyword used to search
 start_date: date to start seaching in year-month-day format xxxx-xx-xx
 end_date: date to stop seaching in year-month-day format xxxx-xx-xx
+
 output_file: filename to write results to
 
 Scrapes tweets related to a given keyword between a specific
@@ -61,6 +64,7 @@ with one keyword. Going foward, in the user interface, the related
 keys should be generated and the user should be promted to pick one
 that will be used in the query.
 '''
+
 def scrape(keyword, start_date, end_date, output_file):
     tweets = []
     query = keyword + ' since:' + start_date + ' until:' + end_date
