@@ -4,8 +4,15 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 
 '''
-Help with animations from : https://stackoverflow.com/questions/43180357/how-to-rotate-a-3d
--plot-in-python-or-as-a-animation-rotate-3-d-view-using-mou
+This function creates a 3D graph of the processed data
+Parameters: processed_file (file that is reuturned from
+sentiment analysis), event_name (string that is used to
+name the file and one axis, the axis will be named "days
+since [event_name]). 
+
+The graph will be saved to a png and includes a legend of
+the color mapping. The axis are as follows: x (Subjectivity),
+y (Days Since Event), z (Polarity)
 '''
 
 def plot_3D(processed_file, event_name):
@@ -20,6 +27,23 @@ def plot_3D(processed_file, event_name):
     ax.set_zlabel('Polarity')
     plt.colorbar(a, label= "Polarity")
     plt.savefig("3D_graph" + event_name.replace(" ", "") + ".png")
+
+'''
+This function can take a few minutes to complete.
+
+This function creates a 3D animation from the graph 
+created from the function above. The animation is a 
+gif of the 3D graph rotated about the z-axis. 
+
+Parameters: processed_file (file that is reuturned from
+sentiment analysis), event_name (string that is used to
+name the file and one axis, the axis will be named "days
+since [event_name]). 
+
+The graph will be saved to a gif file and includes a legend of
+the color mapping. The axis are as follows: x (Subjectivity),
+y (Days Since Event), z (Polarity)
+'''
 
 def animate_3D(processed_file, event_name):
     fig = plt.figure()
