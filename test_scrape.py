@@ -11,7 +11,7 @@ checks that we have correctly filterd the data for repeat users.
 '''
 class TestScrape(unittest.TestCase):
     def setUp(self):
-        scrape.scrape_test("HI", '2021-10-05', '2021-11-05')
+        scrape.scrape_test("HI", '2021-10-05', '2021-11-05', 'output.json')
         self.df = pd.read_json("tweets.json")
     def tearDown(self):
         pass
