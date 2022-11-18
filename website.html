@@ -1,52 +1,55 @@
 <!doctype html>
 <!--To view the page, find the file in file explorer, right click and select open. You should see it in your browser. With help from tutorial-->
 <html>
-    <head>
-        <title>
-            Measuring Public Sentiment Through Twitter
-        </title>
-        <style>
-            body{
-                width:1100px;
-                background:rgb(255, 255, 255);
-                max-width:95%;
-                margin:auto;
-            }
-            h1{
-                float:left;
-                /*color:rgb(100,0,0);*/
-                margin:0;
-            }
-            header h2{
-                text-align:center;
-                font-weight: normal;
-                /*color: rgb(0,150,175);*/
-            }
-            section{
-                background: rgb(215, 232, 255);
-                padding: 10px 100px;
-            }
-            section h2{
-                text-align: center;
-                /*color: rgb(0,100,150);*/
-            }
-            /*section p{
-                color: rgb(0,150,50);
-            }*/
-        </style>
-    </head>
-    <body>
+
+<head>
+    <title>
+        Measuring Public Sentiment Through Twitter
+    </title>
+    <link rel="stylesheet" href="app.css">
+</head>
+
+<body>
+    <nav>
+        <!-- will add valid files later, only make a query works for now-->
+        <a href="website.html">Home</a>
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
+        <a href="collection.html">Make a Query</a>
+    </nav>
+    <main>
         <header>
             <h1>Measuring Public Sentiment Through Twitter</h1>
             <h2>Lite Version!</h2>
+            <hr>
         </header>
         <section>
             <h2>About The Project</h2>
-            <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and display this data on a graph. The first step in this process was scraping data from Twitter. This data was cleaned and analyzed using sentiment analysis. The two key attributes that we took from this analysis was polarity and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads. Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and analyzing our data was in python. We hope to be able to make an interactive graph available to view at the end. An important note is that this is the lite version of our actual program, only taking a max of 300 tweets as data since data collection can take hours. Graphs generated from our large datasets should be available to view separately. </p>
+            <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and
+                display
+                this data on a graph. The first step in this process was scraping data from Twitter. This data was
+                cleaned
+                and analyzed using sentiment analysis. The two key attributes that we took from this analysis was
+                polarity
+                and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads.
+                Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and
+                analyzing our data was in python. We hope to be able to make an interactive graph available to view at
+                the
+                end. An important note is that this is the lite version of our actual program, only taking a max of 300
+                tweets as data since data collection can take hours. Graphs generated from our large datasets should be
+                available to view separately. </p>
         </section>
         <article>
             <h3>How to Use</h3>
-            <p>There will be a query box that takes in a user's search term. Two other text boxes will ask the user to specify a start and end date to search. Finally, there will be a "search" button at the bottom. An error should be thrown if one of these fields are left empty or if no results were generated. If data was found, we will collect and analyze the data (within the maximum amount of tweets) and output a 3D graph that users can interact with by being able to view it from different angles. We should also have a separate section for viewing the graphs generated from our large datasets (over 100,000 tweets!).</p>
+            <p>There will be a query box that takes in a user's search term. Two other text boxes will ask the user to
+                specify a start and end date to search. Finally, there will be a "search" button at the bottom. An error
+                should be thrown if one of these fields are left empty or if no results were generated. If data was
+                found,
+                we will collect and analyze the data (within the maximum amount of tweets) and output a 3D graph that
+                users
+                can interact with by being able to view it from different angles. We should also have a separate section
+                for
+                viewing the graphs generated from our large datasets (over 100,000 tweets!).</p>
         </article>
         <article>
             <h3>Key Functions</h3>
@@ -59,9 +62,17 @@
             </ul>
         </article>
         <article>
+            <h3>Let's Make a Query!</h3>
+            <form action="collection.html">
+                <button>Get Started</button>
+            </form>
+        </article>
+        <article>
             <h3>Creators</h3>
             <p>group 83!</p>
         </article>
-        <footer>CS 222 Project, Fall 2022</footer>
-    </body>
+    </main>
+    <footer>CS 222 Project, Fall 2022</footer>
+</body>
+
 </html>

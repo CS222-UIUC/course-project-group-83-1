@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection</title>
+</head>
+
+<body>
+    <nav>
+        <!-- will add valid files later, only home works for now-->
+        <a href="website.html">Home</a>
+        <a href="about">About</a>
+        <a href="contact">Contact</a>
+        <a href="collection.html">Make a Query</a>
+    </nav>
+    <h1>Make A Query!</h1>
+    <hr>
+    <!-- /submit does not exist right now -->
+    <form action="/sumbit">
+        <!-- name is used for server side things -->
+        <p>
+            <label for="key">Query Term:</label>
+            <input type="text" name="key" id="key" placeholder="ex. 2020 election">
+        </p>
+        <p>
+            <label for="start">Start Search:</label>
+            <input type="date" name="start" id="start">
+        </p>
+        <p>
+            <label for="end">End Search:</label>
+            <input type="date" name="end" id="end">
+        </p>
+    </form>
+</body>
+
+</html>
