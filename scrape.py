@@ -2,7 +2,6 @@ import snscrape.modules.twitter as sntwitter
 import pandas as pd
 from nltk.corpus import wordnet
 from cleantext import clean #need to install clean-text library beforehand
-
 import datetime
 #install unidecode
 '''
@@ -33,7 +32,6 @@ def generate_keys_(word):
 clean_up removes emojis, urls, and other data from the tweet
 that may interfere with the semantic analysis process.
 More factors to consider will be added as deeemed necessary
-
 by the team.
 '''
 def clean_up(text):
@@ -47,7 +45,6 @@ def clean_up(text):
 keyword: keyword used to search
 start_date: date to start seaching in year-month-day format xxxx-xx-xx
 end_date: date to stop seaching in year-month-day format xxxx-xx-xx
-
 output_file: filename to write results to
 
 Scrapes tweets related to a given keyword between a specific
@@ -64,7 +61,6 @@ with one keyword. Going foward, in the user interface, the related
 keys should be generated and the user should be promted to pick one
 that will be used in the query.
 '''
-
 def scrape(keyword, start_date, end_date, output_file):
     tweets = []
     query = keyword + ' since:' + start_date + ' until:' + end_date
@@ -84,34 +80,16 @@ only collects a certain amount of tweets per day in the given date range.
 This function will be used for testing 
 purposes since it is not practical to run 15-60 minute
 tests often.
-Note: I had two ideas for trying to scarpe x amount of tweets per day.
-One was to query each day in the date range
-and add 200 tweets from each day to the data.
-Another was to query the entire date range
-but only save x amount of tweets from each date.
-I don't know if one is more efficient than the other
-as I'm still trying to figure out the second approach
 '''
 def scrape_test(keyword, start_date, end_date, output_file):
     tweets = []
-    # query = keyword + ' since:' + start_date + ' until:' + end_date
-    # data = sntwitter.TwitterSearchScraper(query).get_items()
-    # current_date = datetime.date.fromisoformat(end_date) - datetime.timedelta(1)
-    # for i, tweet in enumerate(data):
-    #     if (tweet.date.date() != current_date):
-    #         continue
-    #     if i < 4:
-    #         tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
-    #     else:
-    #         current_date = current_date - datetime.timedelta(1)
-    #         i = 0
     end_interval = datetime.date.fromisoformat(end_date)
     start_interval = end_interval - datetime.timedelta(1)
     while (end_interval != datetime.date.fromisoformat(start_date)):
         query = keyword + ' since:' + datetime.date.isoformat(start_interval) + ' until:' + datetime.date.isoformat(end_interval)
         data = sntwitter.TwitterSearchScraper(query).get_items()
         for i, tweet in enumerate(data):
-            if i >= 200:
+            if i >= 20: #tweets scraped per day
                 break
             else:
                 tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
@@ -124,5 +102,6 @@ def scrape_test(keyword, start_date, end_date, output_file):
     with open(output_file, "w") as f:
         f.write(df_1.to_json())
 
-#scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
-#scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
+scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
+#scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraudddd.json")
+#scrape_test("dachshund", '2021-10-05', '2021-10-10', "test.json")
