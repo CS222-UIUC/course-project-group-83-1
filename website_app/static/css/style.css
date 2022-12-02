@@ -4,6 +4,11 @@ h1 {
     text-align: center;
     padding: 10px;
 }
+h2 {
+    text-align: center;
+    padding-top: 10px;
+}
+
 body {
     padding-top: 30px;
     padding-right: 30px;
