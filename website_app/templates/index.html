@@ -17,14 +17,45 @@
 </head>
 
 <body>
-    <h1>Main page</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="#">Data visualization</a>
-        <a href="interactive.html">Interactive page</a>
-    </nav>
-    <h2>Project name</h2>
-    <p>Project description</p>
+    <!-- Main submission form -->
+    <h1>Twitter Analysis</h1>
+    <h2>Keyword Search</h2>
+    <form method="post">
+        <div class="form-group">
+            <label for="keyword">Search keyword here</label>
+            <input type="text" name="keyword"
+                   placeholder="Search Twitter for keyword (length > 3)" class="form-control"
+                   value="{{ request.form['keyword'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="start_date">Start Date</label>
+            <input type="text" name="start_date"
+                   placeholder="YYYY-MM-DD" class="form-control"
+                   value="{{ request.form['start_date'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="end_date">End Date</label>
+            <input type="text" name="end_date"
+                   placeholder="YYYY-MM-DD" class="form-control"
+                   value="{{ request.form['end_date'] }}"></input>
+        </div>
+        <div class="form-group">
+            <label for="output_tag">OPTIONAL: Output file</label>
+            <input type="text" name="output_tag"
+                   placeholder="OPTIONAL: Output tag [ex: 'abortion2022-13']" class="form-control"
+                   value="{{ request.form['output_file'] }}"></input>
+        </div>
+    
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+    <!-- Image display test -->
+    <p>Example Image Generated (keyword: "abortion")</p>
+    <img src="{{url_for('static', filename='images/scatter_plot.png')}}">
+
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,6 +1,17 @@
 h1 {
     border: 2px #eee solid;
-    color: blue;
+    color: rgb(29, 161, 242);
     text-align: center;
     padding: 10px;
+}
+body {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
 }
