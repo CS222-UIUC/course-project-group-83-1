@@ -125,5 +125,7 @@ def scrape_twitter(keyword, start_date, end_date, output_file):
         f.write(df_1.to_json())
 
 # renamed scrape_test to scrape_twitter 
-#scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
-#scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
+#scrape_twitter("abortion", "2022-04-25", "2022-05-09", "abortion.json")
+#scrape_twitter("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
+scrape_twitter("voter fraud", "2020-11-01", "2020-11-02", "voter fraud.json")
+
