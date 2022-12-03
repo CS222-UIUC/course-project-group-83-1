@@ -13,35 +13,42 @@
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     
-    <title>Test</title>
+    <title>Group 83 Project</title>
 </head>
 
 <body>
     <!-- Main submission form -->
     <h1>Twitter Analysis (Lite)</h1>
-    <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and display this data on a graph. The first step in this process was scraping data from Twitter. This data was cleaned and analyzed using sentiment analysis. The two key attributes that we took from this analysis was polarity and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads. Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and analyzing our data was in python. We hope to be able to make an interactive graph available to view at the end. An important note is that this is the lite version of our actual program, only taking a max of 300 tweets as data since data collection can take hours. Graphs generated from our large datasets should be available to view separately. </p>
-    <h2>Keyword Search</h2>
+    <p>This is the website for our CS 222 project. Our goal was to conduct sentiment analysis on tweets collected from Twitter and display this data on a graph. The first step in this process was scraping data from Twitter. This data was cleaned and then analyzed using sentiment analysis. The two key attributes that we took from this analysis was polarity and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads. Subjectivity measures how much personal opinion (positive) vs factual information (negative) is contained in a tweet. Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and analyzing our data was in python. We hope to be able to make an interactive graph available to view at the end. An important note is that this is the lite version of our actual program, only taking a max of 200 tweets since scraping a large amount of tweets can take hours. Graphs generated from our larger datasets should be available to view separately. </p>
+    <h2>Usage</h2>
+    <p>To analyze tweets about "dogs" on 12/08/22</p> 
+    <ul>
+        <li>Keyword: dogs</li>
+        <li>Start Date: 12/08/22</li>
+        <li>End Date: 12/09/22</li>
+    </ul>
+    <h2>Search</h2>
     <form method="post">
         <div class="form-group">
-            <label for="keyword">Search keyword here</label>
+            <label for="keyword">Keyword (length must be greater than 3 characters)</label>
             <input type="text" name="keyword"
-                   placeholder="Search Twitter for keyword (length > 3)" class="form-control"
+                   placeholder="election fraud" class="form-control"
                    value="{{ request.form['keyword'] }}"></input>
         </div>
         <div class="form-group">
             <label for="start_date">Start Date</label>
-            <input type="text" name="start_date"
+            <input type="date" name="start_date"
                    placeholder="YYYY-MM-DD" class="form-control"
                    value="{{ request.form['start_date'] }}"></input>
         </div>
         <div class="form-group">
-            <label for="end_date">End Date</label>
-            <input type="text" name="end_date"
+            <label for="end_date">End Date (Exclusive)</label>
+            <input type="date" name="end_date"
                    placeholder="YYYY-MM-DD" class="form-control"
                    value="{{ request.form['end_date'] }}"></input>
         </div>
         <div class="form-group">
-            <label for="output_tag">OPTIONAL: Output file</label>
+            <label for="output_tag">OPTIONAL: Output file name</label>
             <input type="text" name="output_tag"
                    placeholder="OPTIONAL: Output tag [ex: 'abortion2022-13']" class="form-control"
                    value="{{ request.form['output_file'] }}"></input>
@@ -53,8 +60,13 @@
     </form>
 
     <!-- Image display test -->
+    <h2>Graph</h2>
     <p>Example Image Generated (keyword: "abortion")</p>
     <img src="{{url_for('static', filename='images/scatter_plot.png')}}">
+
+    <footer>CS 222 Project, Fall 2022</footer>
+    <footer>Created by: Group 83 (Alyson Chu, Jane Liu, Claire Zhou, Jonathan Zhang)</footer>
+
 
 
     <!-- Optional JavaScript -->
