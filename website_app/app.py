@@ -1,11 +1,16 @@
 from flask import Flask, render_template, request, url_for, flash, redirect
 from werkzeug.exceptions import abort
-import scrape, graph
+import scrape, graph, datetime
 import sentiment_analysis as sen
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'admin123_foobar'
 
+'''
+This takes the keyword, start date, and end date submitted by the user, then
+scrapes the tweets, analyzes their polarity, and visualizes the data and saves the image.
+Doesn't actually display the data yet.
+'''
 def main_process(submit_data):
     keyword, start_date, end_date, output_tag = submit_data
     polarity_tags = ["Tweet", "Polarity", "Subjectivity"]
@@ -47,9 +52,13 @@ def index():
 
         
         # scrape_twitter(keyword, start_date, end_date, output_file)
-        if not keyword or (len(keyword) < 3):
-            # deal with the invalid keyword here
-            # probably should deal with invalid dates too...?
+        end_interval = datetime.date.fromisoformat(end_date)
+        start_interval = datetime.date.fromisoformat(start_date)
+        if (start_interval >= end_interval):
+            print("Invalid dates given")
+            pass
+        elif not keyword or (len(keyword) < 3) :
+            print("Keyword not valid")
             pass
         else:
             # 
