@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Collection</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="collect.css">
+</head>
+
+<body>
+    <nav>
+        <!-- will add valid files later, only home and make query works for now-->
+        <a href="website.html">Home</a>
+        <a href="https://github.com/CS222-UIUC/course-project-group-83-1/tree/main/.github">Code</a>
+        <a href="creators.html">About</a>
+        <a href="index.html">Make a Query</a>
+        <a href="preprocessed.html">Preprocessed Data</a>
+    </nav>
+    <h1>Make A Query!</h1>
+    <!-- /submit does not exist right now -->
+    <form action="/sumbit">
+        <!-- name is used for server side things -->
+        <p>
+            <label for="key">Query Term:</label>
+            <input type="text" name="key" id="key" placeholder="ex. 2020 election">
+        </p>
+        <p>
+            <label for="start">Start Search:</label>
+            <input type="date" name="start" id="start">
+        </p>
+        <p>
+            <label for="end">End Search:</label>
+            <input type="date" name="end" id="end">
+        </p>
+
+        <button>Make Query</button>
+    </form>
+</body>
+
+</html>
