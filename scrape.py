@@ -69,12 +69,16 @@ def scrape(keyword, start_date, end_date, output_file):
     tweets = []
     query = keyword + ' since:' + start_date + ' until:' + end_date
     data = sntwitter.TwitterSearchScraper(query).get_items()
+    count = 0
     for tweet in data:
             tweets.append([clean_up(tweet.content), tweet.date, tweet.user.username])
+            count += 1
+            print(count)
     df_1 = pd.DataFrame(tweets, columns=['Tweet', 'Date', 'User' ])
     df_1.drop_duplicates()
     df_1.drop_duplicates(subset=['User'])
     print(df_1)
+    # with open("war_in_ukraine_week.json", "w") as f:
     with open(output_file, "w") as f:
         f.write(df_1.to_json())
 
@@ -126,3 +130,4 @@ def scrape_test(keyword, start_date, end_date, output_file):
 
 #scrape_test("abortion", "2022-04-25", "2022-05-09", "abortion.json")
 #scrape_test("voter fraud", "2020-11-01", "2020-11-08", "voter fraud.json")
+#scrape("War in Ukraine", "2022-02-24", "2022-03-03")

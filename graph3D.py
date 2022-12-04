@@ -62,6 +62,6 @@ def animate_3D(processed_file, event_name):
     rot_animation = animation.FuncAnimation(fig, rotate, frames=np.arange(0,362,2),interval=100, cache_frame_data = False)
     rot_animation.save("3D_animation" + event_name.replace(" ", "") + ".gif", writer='pillow')
 
-
-#plot_3D("processed_2020_election_week.json", "2020 Election")
+#example graph/animation generation using processed election files
+plot_3D("processed_2020_election_week.json", "2020 Election")
 animate_3D("processed_2020_election_week.json", "2020 Election")
