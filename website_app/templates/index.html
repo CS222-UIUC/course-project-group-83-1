@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
     <link rel="stylesheet" href="../static/css/collect.css">
-
+    
     <title>Test</title>
 </head>
 
@@ -26,7 +26,11 @@
         <a href="index.html">Make a Query</a>
         <a href="preprocessed.html">Preprocessed Data</a>
     </nav>
+
     <!-- Main submission form -->
+    <h1>Twitter Analysis (Lite)</h1>
+    <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and display this data on a graph. The first step in this process was scraping data from Twitter. This data was cleaned and analyzed using sentiment analysis. The two key attributes that we took from this analysis was polarity and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads. Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and analyzing our data was in python. We hope to be able to make an interactive graph available to view at the end. An important note is that this is the lite version of our actual program, only taking a max of 300 tweets as data since data collection can take hours. Graphs generated from our large datasets should be available to view separately. </p>
+
     <h2>Keyword Search</h2>
     <form method="post">
         <div class="form-group">
@@ -62,6 +66,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -71,6 +76,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+
 </body>
 
 </html>
