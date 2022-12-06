@@ -56,13 +56,16 @@
             <label for="output_tag">OPTIONAL: Output file</label>
             <input type="text" name="output_tag"
                    placeholder="OPTIONAL: Output tag [ex: 'abortion2022-13']" class="form-control"
-                   value="{{ request.form['output_file'] }}"></input>
+                   value="{{ request.form['output_tag'] }}"></input>
         </div>
     
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+
+    <img src="{{ url_for('static', filename=uploaded_image) }}" alt=""/>
+    <h3 id="error_message">{{error}}</h3>
     <h2>How to Use</h2>
 
     <p>There will be a query box that takes in a user's search term. Two other text boxes will ask the user to
