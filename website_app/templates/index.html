@@ -7,86 +7,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
-    
-    <title>Test</title>
+
+    <script defer src="../script.js"></script>
+
+    <title>Twitter Analysis (Lite)</title>
 </head>
 
 <body>
-    <!-- Main submission form -->
-    <h1>Twitter Analysis (Lite)</h1>
-    <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and
-        display
-        this data on a graph. The first step in this process was scraping data from Twitter. This data was
-        cleaned
-        and analyzed using sentiment analysis. The two key attributes that we took from this analysis was
-        polarity
-        and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads.
-        Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and
-        analyzing our data was in python. We hope to be able to make an interactive graph available to view at
-        the
-        end. An important note is that this is the lite version of our actual program, only taking a max of 300
-        tweets as data since data collection can take hours. Graphs generated from our large datasets should be
-        available to view separately. </p>
-    <h2>Keyword Search</h2>
-    <form method="post">
-        <div class="form-group">
-            <label for="keyword">Search keyword here</label>
-            <input type="text" name="keyword"
-                   placeholder="Search Twitter for keyword (length > 3)" class="form-control"
-                   value="{{ request.form['keyword'] }}"></input>
-        </div>
-        <div class="form-group">
-            <label for="start_date">Start Date</label>
-            <input type="text" name="start_date"
-                   placeholder="YYYY-MM-DD" class="form-control"
-                   value="{{ request.form['start_date'] }}"></input>
-        </div>
-        <div class="form-group">
-            <label for="end_date">End Date</label>
-            <input type="text" name="end_date"
-                   placeholder="YYYY-MM-DD" class="form-control"
-                   value="{{ request.form['end_date'] }}"></input>
-        </div>
-        <div class="form-group">
-            <label for="output_tag">OPTIONAL: Output file</label>
-            <input type="text" name="output_tag"
-                   placeholder="OPTIONAL: Output tag [ex: 'abortion2022-13']" class="form-control"
-                   value="{{ request.form['output_tag'] }}"></input>
-        </div>
-    
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
+    <header class="header">
+        <a href="#">
+            <img class="twitter-logo" src="../static/images/logo.png" />
+        </a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a class="nav-link" href="#how">How it works</a></li>
+                <li><a class="nav-link" href="#try">Try it out</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <img src="{{ url_for('static', filename=uploaded_image) }}" alt=""/>
-    <h3 id="error_message">{{error}}</h3>
-    <h2>How to Use</h2>
+    <main>
+        <section class="desc">
+            <h1 class="heading-primary">Twitter Analysis (Lite)</h1>
+            <p class="description">
+                This is the website for our CS 222 project. Our goal was to analyze data collected
+                from Twitter and
+                display
+                this data on a graph. The first step in this process was scraping data from Twitter. This data was
+                cleaned
+                and analyzed using sentiment analysis. The two key attributes that we took from this analysis was
+                polarity
+                and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads.
+                Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and
+                analyzing our data was in python. We hope to be able to make an interactive graph available to view at
+                the
+                end. An important note is that this is the lite version of our actual program, only taking a max of 300
+                tweets as data since data collection can take hours. Graphs generated from our large datasets should be
+                available to view separately.
+            </p>
+            <br>
+        </section>
 
-    <p>There will be a query box that takes in a user's search term. Two other text boxes will ask the user to
-        specify a start and end date to search. Finally, there will be a "search" button at the bottom. An error
-        should be thrown if one of these fields are left empty or if no results were generated. If data was
-        found,
-        we will collect and analyze the data (within the maximum amount of tweets) and output a 3D graph that
-        users
-        can interact with by being able to view it from different angles. We should also have a separate section
-        for
-        viewing the graphs generated from our large datasets (over 100,000 tweets!).</p>
-    <!-- Image display test -->
-    <p>Example Image Generated (keyword: "abortion")</p>
-    <img src="{{url_for('static', filename='images/scatter_plot.png')}}">
+        <section class="how" id="how">
+            <h2 class="heading-secondary">How it works</h2>
+            <p class="description">
+                There will be a query box that takes in a user's search term. Two other text boxes will ask the user to
+                specify a start and end date to search. Finally, there will be a "search" button at the bottom. An error
+                should be thrown if one of these fields are left empty or if no results were generated. If data was
+                found, we will collect and analyze the data (within the maximum amount of tweets) and output a 3D graph
+                that
+                users can interact with by being able to view it from different angles. We should also have a separate
+                section
+                for viewing the graphs generated from our large datasets (over 100,000 tweets!).
+            <p class="example">Example Image Generated (keyword: "abortion")</p>
+            <img src="{{url_for('static', filename='images/scatter_plot.png')}}">
+            </p>
+            <br>
+        </section>
 
+        <section class="try" id="try">
+            <h2 class="heading-secondary">Try it out</h2>
+            <h2 class="keyword">Keyword Search</h2>
+            <form method="post">
+                <div class="form-group">
+                    <label for="keyword">Search keyword here</label>
+                    <input type="text" name="keyword" placeholder="Search Twitter for keyword (length > 3)"
+                        class="form-control" value="{{ request.form['keyword'] }}" minlength="3" required></input>
+                </div>
+                <div class="form-group">
+                    <label for="start_date">Start Date</label>
+                    <input type="date" name="start_date" placeholder="YYYY-MM-DD" class="form-control"
+                        value="{{ request.form['start_date'] }}" required></input>
+                </div>
+                <div class="form-group">
+                    <label for="end_date">End Date</label>
+                    <input type="date" name="end_date" placeholder="YYYY-MM-DD" class="form-control"
+                        value="{{ request.form['end_date'] }}" required></input>
+                </div>
+                <div class="form-group">
+                    <label for="output_tag">OPTIONAL: Output file</label>
+                    <input type="text" name="output_tag" placeholder="OPTIONAL: Output tag [ex: 'abortion2022-13']"
+                        class="form-control" value="{{ request.form['output_tag'] }}" required></input>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+
+            <img src="{{ url_for('static', filename=uploaded_image) }}" alt="" />
+            <h3 id="error_message">{{error}}</h3>
+        </section>
+    </main>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

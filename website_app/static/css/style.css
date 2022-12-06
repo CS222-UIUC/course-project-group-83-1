@@ -1,25 +1,151 @@
-h1 {
-    border: 2px #eee solid;
-    color: rgb(29, 161, 242);
-    text-align: center;
-    padding: 10px;
-}
-h2 {
-    text-align: center;
-    padding-top: 10px;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
 }
 
 body {
+    line-height: 1;
+    font-weight: 400;
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 4.8rem;
     padding-top: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
     padding-left: 30px;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 9.6rem;
+    padding: 0 4.8rem;
+    position: sticky;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: rgba(255, 255, 255, 0.97);
+    z-index: 999;
+}
+
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 9.6rem;
+    padding: 0 4.8rem;
+    position: sticky;
+    background-color: rgb(232, 245, 253);
+}
+
+.sticky .header {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 8rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: rgba(255, 255, 255, 0.97);
+    z-index: 999;
+    box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+} */
+
+
+.twitter-logo {
+    height: 5rem;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 4.8rem;
+}
+
+.nav-link:link,
+.nav-link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: rgb(29, 161, 242);
+    font-weight: 500;
+    font-size: 2rem;
+    transition: all 0.3s;
+}
+
+.nav-link:hover,
+.nav-link:active {
+    color: #333;
+}
+
+.heading-primary {
+    font-size: 5.2rem;
+    line-height: 1.05;
+    margin-bottom: 9.6rem;
+    text-align: center;
+    color: rgb(29, 161, 242);
+    font-weight: bold;
+}
+
+.heading-secondary {
+    font-size: 4.4rem;
+    line-height: 1.2;
+    margin-bottom: 3.2rem;
+    text-align: center;
+    color: rgb(29, 161, 242);
+    text-decoration: underline;
+}
+
+/* h1 {
+    border: 2px #eee solid;
+    color: rgb(29, 161, 242);
+    text-align: center;
+    padding: 10px;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 10px;
+} */
+
 img {
     max-width: 100%;
     height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    padding-bottom: 30px;
 }
+
+.example {
+    text-align: center;
+    font-style: italic;
+}
+
+input:invalid {
+    border-color: red;
+}
+
 #error_message {
     color: red;
+}
+
+.btn {
+    background-color: rgb(8, 160, 233);
+    border-color: rgb(8, 160, 233);
+}
+
+.keyword {
+    font-weight: bold;
+}
+
+.form-group {
+    font-size: smaller;
 }
