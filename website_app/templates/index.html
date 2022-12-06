@@ -19,7 +19,19 @@
 <body>
     <!-- Main submission form -->
     <h1>Twitter Analysis (Lite)</h1>
-    <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and display this data on a graph. The first step in this process was scraping data from Twitter. This data was cleaned and analyzed using sentiment analysis. The two key attributes that we took from this analysis was polarity and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads. Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and analyzing our data was in python. We hope to be able to make an interactive graph available to view at the end. An important note is that this is the lite version of our actual program, only taking a max of 300 tweets as data since data collection can take hours. Graphs generated from our large datasets should be available to view separately. </p>
+    <p>This is the website for our CS 222 project. Our goal was to analyze data collected from Twitter and
+        display
+        this data on a graph. The first step in this process was scraping data from Twitter. This data was
+        cleaned
+        and analyzed using sentiment analysis. The two key attributes that we took from this analysis was
+        polarity
+        and subjectivity. The polarity measures how "positive" or "negative" a text is in terms of how it reads.
+        Finally, a graph will be generated from the final results! All of the code for collecting, cleaning, and
+        analyzing our data was in python. We hope to be able to make an interactive graph available to view at
+        the
+        end. An important note is that this is the lite version of our actual program, only taking a max of 300
+        tweets as data since data collection can take hours. Graphs generated from our large datasets should be
+        available to view separately. </p>
     <h2>Keyword Search</h2>
     <form method="post">
         <div class="form-group">
@@ -51,7 +63,17 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>
     </form>
+    <h2>How to Use</h2>
 
+    <p>There will be a query box that takes in a user's search term. Two other text boxes will ask the user to
+        specify a start and end date to search. Finally, there will be a "search" button at the bottom. An error
+        should be thrown if one of these fields are left empty or if no results were generated. If data was
+        found,
+        we will collect and analyze the data (within the maximum amount of tweets) and output a 3D graph that
+        users
+        can interact with by being able to view it from different angles. We should also have a separate section
+        for
+        viewing the graphs generated from our large datasets (over 100,000 tweets!).</p>
     <!-- Image display test -->
     <p>Example Image Generated (keyword: "abortion")</p>
     <img src="{{url_for('static', filename='images/scatter_plot.png')}}">

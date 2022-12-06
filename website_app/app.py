@@ -15,10 +15,10 @@ def main_process(submit_data):
     average_folder = "averaged_data/"
     images_folder = "data_images/"
 
-    
-    scraped_output_file = scraped_data_folder + output_tag + "_scraped.json"
-    full_polarity_file = full_polarity_folder + output_tag + "_pol.json"
-    avg_polarity_file = average_folder + output_tag + "_avg.json"
+    # change this part, put the "scraped" etc, tags at the beginning
+    scraped_output_file = scraped_data_folder + "scraped_" + output_tag + ".json"
+    full_polarity_file = full_polarity_folder + "processed_" + output_tag + ".json"
+    avg_polarity_file = average_folder + "averaged_" + output_tag + ".json"
 
     scrape.scrape_twitter(keyword, start_date, end_date, scraped_output_file)
     
@@ -51,6 +51,9 @@ def index():
             # deal with the invalid keyword here
             # probably should deal with invalid dates too...?
             pass
+        elif not start_date or not end_date:
+
+            pass
         else:
             # 
             # ----- check if this keyword has been used before
@@ -59,7 +62,7 @@ def index():
             
             #------ other wise conduct an entirely new scrape of twitter
             submit_data = keyword, start_date, end_date, output_tag
-            main_process(submit_data)
+            #main_process(submit_data)
             
     
     return render_template('index.html')

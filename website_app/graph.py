@@ -100,4 +100,4 @@ def visualize_data(json_file, output_tag):
     create_bar(df, output_tag)
     create_pie(df, output_tag)
 
-visualize_data("processed_df_abortion.json")
+#visualize_data("processed_df_abortion.json")
