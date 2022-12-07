@@ -1,0 +1,122 @@
+h1 {
+    border: 2px #eee solid;
+    color: rgb(29, 161, 242);
+    text-align: center;
+    padding: 10px;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    height: 10rem;
+    position: relative;
+}
+
+/* .home {
+    background-color: #eee;
+} */
+
+/* .text {} */
+
+.heading {
+    font-weight: 600;
+    color: rgb(29, 161, 242);
+    letter-spacing: -0.5px;
+    background-color: #eee;
+}
+
+.desc {
+    font-size: 24px;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
+}
+
+.creators {}
+
+body {
+    font-family: sans-serif;
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    padding: 1em 1em;
+}
+
+a:hover {
+    color: #ffb703;
+    text-decoration: solid;
+    border-color: #ffb703;
+    border-style: solid;
+    border-width: 2px;
+}
+
+nav {
+    top: 0;
+    position: fixed;
+    padding: 1.2em;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+.nav-link:link,
+.nav-link:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 2rem;
+    transition: all 0.3s;
+}
+
+.nav-link:hover,
+.nav-link:active {
+    color: rgb(29, 161, 242);
+}
+
+input {
+    margin: 5px 0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input:invalid {
+    border-color: red;
+}
+
+button {
+    all: unset;
+    cursor: pointer;
+    width: 120px;
+    height: 44px;
+}
+
+svg {
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+}
