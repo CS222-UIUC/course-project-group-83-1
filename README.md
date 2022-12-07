@@ -1,6 +1,7 @@
 # Twitter Analyzer
 Group 83
 Alyson Chu, Claire Chou, Jane Liu, Jonathan Zhang
+
 ## Introduction
 The Twitter Analyzer measures public opinion of political issues through collecting and evaluating Tweets from Twitter that are related to a user-specified keyword.
 #### Functionality
@@ -11,15 +12,15 @@ The current software functionality is as follows:
 - Performs sentiment analysis on a collection of Tweets
 - Visualizes and displays a graphical representation on the user interface
 - Stores the scraped Tweets, sentiment analysis, and visualization outputs
-
 #### Alternatives
 - Alternatives exist, however mostly in an academic setting to gage specific focus areas
   - Ex: “Twitter as a sentinel tool to monitor public opinion on vaccination: an opinion mining analysis from September 2016 to August 2017 in Italy”
 - Our software offers a broader scope
   - User can specify any keyword
   - Uses trained pipeline
-## Technical Architecture
 
+## Technical Architecture
+The software pipeline works as follows: Website --> Twitter Scraper --> Sentiment Analysis --> Visualization
 #### Website (User)
 - Responsible for responding to user interactions
   - Takes in user input
@@ -44,6 +45,7 @@ The current software functionality is as follows:
 - Graphs the categorized Tweets
 - Utilizes polarity data from Sentiment Analysis
 - Outputs and saves graphical representations of data that Website (User) will display
+
 ## Installation
 1. Download website_app
 2. Create and activate a python virtual environment (“venv”)
